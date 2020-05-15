@@ -17,7 +17,7 @@ require(tidyverse)
 dat <- tibble(x = c(1:1000),
               y = log(c(1:1000)),
               z = rnorm(1000), 
-              g = c(rep('a', 250), rep('b', 250), rep('c', 250), rep('d', 250)))
+              g = c(rep('1', 250), rep('2', 250), rep('3', 250), rep('4', 250)))
 
 p1 <- ggplot(dat, aes(x = x, y = y, z = z)) +
   geom_density_2d(aes(col = g),
@@ -27,4 +27,16 @@ p1 <- ggplot(dat, aes(x = x, y = y, z = z)) +
 
 ggsave(filename = 'output/plots/dense.png', 
        plot = p1,
+       width = 10, height = 10, units = 'cm')
+
+p2 <- dat %>% 
+  mutate(x1 = x  + y * z,
+         y1 = log(y) - z,
+         g1 = as.numeric(g) * z) %>% 
+  ggplot(aes(x = x1, y = y1)) +
+  geom_point(aes(col = g1, size = x1), show.legend = FALSE) +
+  theme_void()
+  
+ggsave(filename = 'output/plots/blobs.png', 
+       plot = p2,
        width = 10, height = 10, units = 'cm')
