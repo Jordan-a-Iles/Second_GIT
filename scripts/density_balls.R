@@ -11,7 +11,7 @@ rm(list = ls(all.names = TRUE))
 require(tidyverse)
 
 #### Set working directory ----
-setwd('~/../Dropbox/JCU/R/Second_GIT')
+# setwd('~/../Dropbox/JCU/R/Second_GIT')
 
 
 dat <- tibble(x = c(1:1000),
